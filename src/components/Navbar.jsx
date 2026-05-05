@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -43,15 +44,15 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2 group">
-              <div className="w-10 h-10 bg-gold-gradient rounded-lg flex items-center justify-center">
-                <span className="text-black font-bebas text-2xl font-bold">B</span>
+            <Link to="/" className="flex items-center space-x-3 group">
+              <div className="w-40 h-30 sm:w-24 sm:h-24">
+                <img 
+                  src={logo} 
+                  alt="Boss Fitness Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <div>
-                <h1 className="font-bebas text-2xl sm:text-3xl tracking-wider text-white group-hover:text-gold transition-smooth">
-                  BOSS FITNESS
-                </h1>
-              </div>
+              
             </Link>
 
             {/* Desktop Navigation */}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import ScrollProgressBar from './components/ScrollProgressBar';
+import LoadingScreen from './components/LoadingScreen';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -101,6 +102,8 @@ function AnimatedRoutes() {
 }
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     // Initialize AOS (Animate On Scroll)
     AOS.init({
@@ -108,21 +111,41 @@ function App() {
       once: true,
       easing: 'ease-out',
     });
+
+    // Simulate initial loading time
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500); // Show loading screen for 2.5 seconds
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <HelmetProvider>
       <Router>
-        <ScrollToTop />
-        <div className="min-h-screen flex flex-col bg-primary-bg">
-          <ScrollProgressBar />
-          <Navbar />
-          <main className="flex-grow">
-            <AnimatedRoutes />
-          </main>
-          <Footer />
-          <WhatsAppButton />
-        </div>
+        <AnimatePresence mode="wait">
+          {loading ? (
+            <LoadingScreen key="loading" />
+          ) : (
+            <motion.div
+              key="app"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ScrollToTop />
+              <div className="min-h-screen flex flex-col bg-primary-bg">
+                <ScrollProgressBar />
+                <Navbar />
+                <main className="flex-grow">
+                  <AnimatedRoutes />
+                </main>
+                <Footer />
+                <WhatsAppButton />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Router>
     </HelmetProvider>
   );

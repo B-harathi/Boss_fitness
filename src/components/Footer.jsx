@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaInstagram, FaFacebook, FaYoutube, FaWhatsapp, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
   const quickLinks = [
@@ -32,9 +33,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Section */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gold-gradient rounded-lg flex items-center justify-center">
-                <span className="text-black font-bebas text-2xl font-bold">B</span>
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-12 h-12">
+                <img 
+                  src={logo} 
+                  alt="Boss Fitness Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <h3 className="font-bebas text-2xl tracking-wider text-white">
                 BOSS FITNESS
